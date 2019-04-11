@@ -1,2 +1,2 @@
-# gharage-android
-A Gharage Android News Client
+# Gharage Android
+A Simple Android News Client for [Gharage](https://gharage.com)
