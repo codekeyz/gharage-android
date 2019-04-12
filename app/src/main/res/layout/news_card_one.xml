@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/story_card"
+    android:layout_margin="@dimen/vertical_padding"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="5dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:background="#FEFEFE">
+
+        <!-- ImageView for news story thumbnail image -->
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/post_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@color/light_gray_no_image"
+            android:contentDescription="@string/story_image_con_desc"
+            android:scaleType="centerCrop" />
+
+        <!-- News story information container -->
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/vertical_padding"
+            android:layout_toEndOf="@id/post_image"
+            android:orientation="vertical">
+
+            <!-- News title -->
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/news_title"
+                style="@style/news_title"
+                android:maxLines="2"
+                android:ellipsize="marquee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="News Title" />
+
+            <!-- News section -->
+            <TextView
+                android:id="@+id/news_desc"
+                android:layout_marginTop="5dp"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#3A4A51"
+                android:maxLines="3"
+                android:ellipsize="marquee"
+                tools:text="Section Name" />
+
+            <!-- Date when the news was published -->
+            <TextView
+                android:id="@+id/news_date"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                tools:text="Date" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
