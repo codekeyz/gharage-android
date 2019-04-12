@@ -2,14 +2,17 @@ package com.codekeyz.gharagenews;
 
 import android.app.Application;
 
-
-import com.codekeyz.gharagenews.ui.news.DaggerNewsComponent;
-import com.codekeyz.gharagenews.ui.news.NewsComponent;
-import com.codekeyz.gharagenews.ui.news.NewsModule;
+import com.codekeyz.gharagenews.di.components.DaggerNewsComponent;
+import com.codekeyz.gharagenews.di.components.NewsComponent;
+import com.codekeyz.gharagenews.di.modules.NewsModule;
 
 public class MainApplication extends Application {
 
     private static NewsComponent newsComponent;
+
+    public static NewsComponent getNewsComponent() {
+        return newsComponent;
+    }
 
     @Override
     public void onCreate() {
@@ -18,9 +21,5 @@ public class MainApplication extends Application {
         newsComponent = DaggerNewsComponent.builder()
                 .newsModule(new NewsModule(getApplicationContext()))
                 .build();
-    }
-
-    public static NewsComponent getNewsComponent() {
-        return newsComponent;
     }
 }
