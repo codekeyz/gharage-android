@@ -1,6 +1,7 @@
-package com.codekeyz.gharagenews.ui.news;
+package com.codekeyz.gharagenews.di.components;
 
 import com.codekeyz.gharagenews.di.modules.NewsModule;
+import com.codekeyz.gharagenews.ui.news.NewsActivity;
 
 import dagger.Component;
 

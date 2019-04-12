@@ -9,7 +9,8 @@ public class NewsData {
     private String post_time;
     private String post_detail;
 
-    public NewsData(){}
+    public NewsData() {
+    }
 
     public String getTitle() {
         return title;

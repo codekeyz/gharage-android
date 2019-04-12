@@ -1,9 +1,9 @@
-package com.codekeyz.gharagenews.ui.news;
+package com.codekeyz.gharagenews.di.modules;
 
 import android.content.Context;
 import android.util.Log;
 
-import com.codekeyz.gharagenews.di.modules.NetworkModule;
+import com.codekeyz.gharagenews.ui.news.NewsService;
 
 import java.io.File;
 
