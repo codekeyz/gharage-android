@@ -45,9 +45,10 @@ public class NewsActivity extends AppCompatActivity implements NewsPresenter.Vie
     @BindView(R.id.newslist)
     RecyclerView recyclerView;
 
-    private int CURRENT_PAGE = 1, NEXT_PAGE = 1;
+    private int CURRENT_PAGE = 1, NEXT_PAGE = 1, SCROLL_POSITION;
     private Map<String, List<NewsData>> newsDataMap;
     private boolean isloading;
+    private LinearLayoutManager linearLayoutManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class NewsActivity extends AppCompatActivity implements NewsPresenter.Vie
         if (savedInstanceState != null) {
             this.CURRENT_PAGE = savedInstanceState.getInt("CURRENT_PAGE", CURRENT_PAGE);
             this.NEXT_PAGE = savedInstanceState.getInt("NEXT_PAGE", NEXT_PAGE);
+            this.SCROLL_POSITION = savedInstanceState.getInt("SCROLL_POSITION");
         }
         newsDataMap = new HashMap<>();
 
@@ -74,7 +76,7 @@ public class NewsActivity extends AppCompatActivity implements NewsPresenter.Vie
 
 
         // Setup RecyclerView
-        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(newsAdapter);
@@ -127,6 +129,7 @@ public class NewsActivity extends AppCompatActivity implements NewsPresenter.Vie
 
     @Override
     public void onResult(List<NewsData> result, int pageNumber) {
+        this.SCROLL_POSITION = linearLayoutManager.findLastVisibleItemPosition();
         List<NewsData> list = new ArrayList<>();
         this.newsDataMap.put(String.valueOf(pageNumber), result);
         for (List<NewsData> data: newsDataMap.values()){
@@ -135,6 +138,7 @@ public class NewsActivity extends AppCompatActivity implements NewsPresenter.Vie
         this.newsAdapter.addNewsData(list);
         this.CURRENT_PAGE = pageNumber;
         this.NEXT_PAGE = pageNumber + 1;
+        this.recyclerView.scrollToPosition(SCROLL_POSITION);
     }
 
     @Override
@@ -148,6 +152,7 @@ public class NewsActivity extends AppCompatActivity implements NewsPresenter.Vie
         super.onSaveInstanceState(outState);
         outState.putInt("CURRENT_PAGE", CURRENT_PAGE);
         outState.putInt("NEXT_PAGE", NEXT_PAGE);
+        outState.putInt("SCROLL_POSITION", linearLayoutManager.findFirstVisibleItemPosition());
     }
 
     @Override
@@ -155,5 +160,6 @@ public class NewsActivity extends AppCompatActivity implements NewsPresenter.Vie
         super.onRestoreInstanceState(savedInstanceState);
         this.CURRENT_PAGE =  savedInstanceState.getInt("CURRENT_PAGE", CURRENT_PAGE);
         this.NEXT_PAGE = savedInstanceState.getInt("NEXT_PAGE", NEXT_PAGE);
+        this.SCROLL_POSITION = savedInstanceState.getInt("SCROLL_POSITION");
     }
 }
